@@ -1,5 +1,6 @@
 package ro.pub.cs.systems.eim.myapplicationpracticaltest01var06
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editTextNumber: EditText
     private lateinit var editTextNumber2: EditText
     private lateinit var editTextNumber3: EditText
-
+    private lateinit var random: Button
     private var listar: List<String> = listOf(
         "1","2","3","*")
 
@@ -40,20 +41,16 @@ class MainActivity : AppCompatActivity() {
         editTextNumber = findViewById(R.id.editTextNumber)
         editTextNumber2 = findViewById(R.id.editTextNumber2)
         editTextNumber3 = findViewById(R.id.editTextNumber3)
-
+        random = findViewById(R.id.random)
+        Hold1.setOnClickListener(ClickListener())
+        Hold2.setOnClickListener(ClickListener())
+        Hold3.setOnClickListener(ClickListener())
+        Play.setOnClickListener(ClickListener())
+        random.setOnClickListener(ClickListener())
     }
     private inner class ClickListener : View.OnClickListener {
         override fun onClick(v: View) {
             when (v.id) {
-                R.id.Hold1 -> {
-                    Hold1.isChecked = !Hold1.isChecked
-                }
-                R.id.Hold2 -> {
-                    Hold2.isChecked = !Hold2.isChecked
-                }
-                R.id.Hold3 -> {
-                    Hold3.isChecked = !Hold3.isChecked
-                }
                 R.id.Play -> {
 
                 }
@@ -66,9 +63,15 @@ class MainActivity : AppCompatActivity() {
                     }
                     if(!Hold3.isChecked) {
                         editTextNumber3.setText(listar.random())
+
                     }
                 }
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        android.widget.Toast.makeText(this, editTextNumber3.toString(),android.widget.Toast.LENGTH_SHORT).show()
     }
 }
