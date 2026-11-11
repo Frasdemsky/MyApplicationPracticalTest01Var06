@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         "1","2","3","*")
 
     var score = 0
-    private var scorTotal: Int = 0
+    var scorTotal = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
