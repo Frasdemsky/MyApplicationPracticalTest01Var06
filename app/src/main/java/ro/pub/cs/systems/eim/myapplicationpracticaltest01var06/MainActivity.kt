@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
     private var listar: List<String> = listOf(
         "1","2","3","*")
 
+    var score = 0
+    var scorTotal = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,8 +48,12 @@ class MainActivity : AppCompatActivity() {
         Hold1.setOnClickListener(ClickListener())
         Hold2.setOnClickListener(ClickListener())
         Hold3.setOnClickListener(ClickListener())
-        Play.setOnClickListener(ClickListener())
         random.setOnClickListener(ClickListener())
+        Play.setOnClickListener{
+            val intent = Intent(applicationContext, PracticalTest01Var06SecondaryActivity::class.java)
+            intent.putExtra("score", score.toString())
+            startActivityForResult(intent, 1)
+        }
     }
     private inner class ClickListener : View.OnClickListener {
         override fun onClick(v: View) {
@@ -66,6 +73,23 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
+            }
+            if (Hold1.isChecked || Hold2.isChecked || Hold3.isChecked) {
+                if (editTextNumber.text.toString() == editTextNumber2.text.toString()
+                    || editTextNumber2.text.toString() == editTextNumber3.text.toString()
+                    || editTextNumber.text.toString() == editTextNumber3.text.toString())
+                {
+                    score = 50
+                }
+            }
+            if (!Hold1.isChecked && !Hold2.isChecked && !Hold3.isChecked){
+                if (editTextNumber.text.toString() == editTextNumber2.text.toString()
+                    && editTextNumber2.text.toString() == editTextNumber3.text.toString()) {
+                    score = 100
+                }
+            }
+            if (Hold1.isChecked && Hold2.isChecked && Hold3.isChecked){
+                score = 0
             }
         }
     }
