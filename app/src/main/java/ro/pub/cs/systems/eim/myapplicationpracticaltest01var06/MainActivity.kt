@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         "1","2","3","*")
 
     var score = 0
-    var scorTotal = 0
+    private var scorTotal: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("score", score.toString())
             startActivityForResult(intent, 1)
         }
+        scorTotal = scorTotal + intent.getIntExtra("total", 0)
+        android.widget.Toast.makeText(this, scorTotal.toString(), android.widget.Toast.LENGTH_SHORT).show()
     }
     private inner class ClickListener : View.OnClickListener {
         override fun onClick(v: View) {
@@ -98,4 +100,11 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         android.widget.Toast.makeText(this, editTextNumber3.toString(),android.widget.Toast.LENGTH_SHORT).show()
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("scorTotal", scorTotal)
+    }
+
 }
+

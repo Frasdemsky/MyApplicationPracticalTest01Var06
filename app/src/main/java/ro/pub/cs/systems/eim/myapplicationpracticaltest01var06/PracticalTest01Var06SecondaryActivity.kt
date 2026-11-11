@@ -30,7 +30,7 @@ class PracticalTest01Var06SecondaryActivity : AppCompatActivity() {
         editTextNumber4 = findViewById(R.id.editTextNumber4)
         OK.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
-            intent.putExtra("total", editTextNumber4.text.toString())
+            intent.putExtra("total", editTextNumber4.text.toString().toInt())
             startActivity(intent)
         }
         editTextNumber4.setText(intent.getStringExtra("score"))
