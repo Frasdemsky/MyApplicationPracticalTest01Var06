@@ -1,6 +1,7 @@
 package ro.pub.cs.systems.eim.myapplicationpracticaltest01var06
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -8,6 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.compose.remote.creation.dsl.random
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var Hold1: CheckBox
@@ -17,6 +20,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editTextNumber: EditText
     private lateinit var editTextNumber2: EditText
     private lateinit var editTextNumber3: EditText
+
+    private var listar: List<String> = listOf(
+        "1","2","3","*")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,38 @@ class MainActivity : AppCompatActivity() {
         Hold2 = findViewById(R.id.Hold2)
         Hold3 = findViewById(R.id.Hold3)
         Play = findViewById(R.id.Play)
-    }
+        editTextNumber = findViewById(R.id.editTextNumber)
+        editTextNumber2 = findViewById(R.id.editTextNumber2)
+        editTextNumber3 = findViewById(R.id.editTextNumber3)
 
+    }
+    private inner class ClickListener : View.OnClickListener {
+        override fun onClick(v: View) {
+            when (v.id) {
+                R.id.Hold1 -> {
+                    Hold1.isChecked = !Hold1.isChecked
+                }
+                R.id.Hold2 -> {
+                    Hold2.isChecked = !Hold2.isChecked
+                }
+                R.id.Hold3 -> {
+                    Hold3.isChecked = !Hold3.isChecked
+                }
+                R.id.Play -> {
+
+                }
+                R.id.random -> {
+                    if(!Hold1.isChecked) {
+                        editTextNumber.setText(listar.random())
+                    }
+                    if(!Hold2.isChecked) {
+                        editTextNumber2.setText(listar.random())
+                    }
+                    if(!Hold3.isChecked) {
+                        editTextNumber3.setText(listar.random())
+                    }
+                }
+            }
+        }
+    }
 }
